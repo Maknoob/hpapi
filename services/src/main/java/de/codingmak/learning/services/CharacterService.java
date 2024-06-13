@@ -6,6 +6,7 @@ import de.codingmak.learning.models.Character;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CharacterService {
@@ -82,5 +83,29 @@ public class CharacterService {
 
     public List<Character> getCharacterList() {
         return characterList;
+    }
+
+    public List<Character> getCharacterByName(String name) {
+        return characterList.stream()
+                .filter(character -> character.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
+
+    public List<Character> getCharacterByGender(String gender) {
+        return characterList.stream()
+                .filter(character -> character.getGender().equalsIgnoreCase(gender))
+                .collect(Collectors.toList());
+    }
+
+    public List<Character> getCharacterByAge(int age) {
+        return characterList.stream()
+                .filter(character -> character.getAge() == age)
+                .collect(Collectors.toList());
+    }
+
+    public List<Character> getCharacterByHouse(String house) {
+        return characterList.stream()
+                .filter(character -> character.getHouse().equalsIgnoreCase(house))
+                .collect(Collectors.toList());
     }
 }
