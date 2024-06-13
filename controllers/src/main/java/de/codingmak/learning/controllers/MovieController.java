@@ -1,13 +1,12 @@
 package de.codingmak.learning.controllers;
 
+import de.codingmak.learning.exceptions.InvalidPartException;
 import de.codingmak.learning.exceptions.MovieNotFoundException;
 import de.codingmak.learning.models.Movie;
 import de.codingmak.learning.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,12 +33,7 @@ public class MovieController {
 
     @GetMapping(params = "year")
     public List<Movie> getMovieByReleaseYear(@RequestParam(name = "year") String year) {
-        List<Movie> movies = movieService.getMovieByReleaseYear(year);
-        if (movies.isEmpty()) {
-            throw new MovieNotFoundException("No movies found for release year: " + year);
-        }
-        return movies;
-
+        return movieService.getMovieByReleaseYear(year);
     }
 
     @GetMapping(params = "name")
@@ -47,4 +41,16 @@ public class MovieController {
         return movieService.getMovieByName(name);
     }
 
+
+    @ExceptionHandler(MovieNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleMovieNotFoundException(MovieNotFoundException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(InvalidPartException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleInvalidPartException(InvalidPartException e) {
+        return e.getMessage();
+    }
 }
