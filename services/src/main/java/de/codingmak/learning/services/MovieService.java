@@ -1,5 +1,7 @@
 package de.codingmak.learning.services;
 
+import de.codingmak.learning.exceptions.InvalidPartException;
+import de.codingmak.learning.exceptions.MovieNotFoundException;
 import org.springframework.stereotype.Service;
 
 import de.codingmak.learning.models.Movie;
@@ -34,20 +36,44 @@ public class MovieService {
     }
 
     public List<Movie> getMovieByPart(String part) {
+        int partNumber;
+
+        try {
+            partNumber = Integer.parseInt(part);
+        } catch (NumberFormatException e) {
+            throw new InvalidPartException("Invalid part number: " + part);
+        }
+
+        if (partNumber <= 0 || partNumber > 8) {
+            throw new MovieNotFoundException("Movie not found with part: " + part);
+        }
+
         return movieList.stream()
                 .filter(movie -> movie.getPart().equals(part))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Movie> getMovieByReleaseYear(String releaseYear) {
-        return movieList.stream()
+        List<Movie> movies = movieList.stream()
                 .filter(movie -> movie.getReleaseYear().equals(releaseYear))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (movies.isEmpty()) {
+            throw new MovieNotFoundException("No movies found for release year: " + releaseYear);
+        }
+
+        return movies;
     }
 
     public List<Movie> getMovieByName(String name) {
-        return movieList.stream()
+        List<Movie> movies = movieList.stream()
                 .filter(movie -> movie.getName().toLowerCase().contains(name.toLowerCase()))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (movies.isEmpty()) {
+            throw new MovieNotFoundException("No movies found with name: " + name);
+        }
+
+        return movies;
     }
 }
