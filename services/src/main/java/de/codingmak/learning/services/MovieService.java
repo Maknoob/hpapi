@@ -8,7 +8,6 @@ import de.codingmak.learning.models.Movie;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -54,15 +53,22 @@ public class MovieService {
     }
 
     public List<Movie> getMovieByReleaseYear(String releaseYear) {
-        List<Movie> movies = movieList.stream()
-                .filter(movie -> movie.getReleaseYear().equals(releaseYear))
-                .toList();
+        int yearNumber;
 
-        if (movies.isEmpty()) {
+        try {
+            yearNumber = Integer.parseInt(releaseYear);
+        } catch (NumberFormatException e) {
+            throw new InvalidPartException("This is not a valid number: " + releaseYear);
+        }
+
+        List<Movie> moviesByYear = movieList.stream()
+                .filter(movie -> movie.getReleaseYear().equalsIgnoreCase(releaseYear))
+                .toList();
+        if (moviesByYear.isEmpty()) {
             throw new MovieNotFoundException("No movies found for release year: " + releaseYear);
         }
 
-        return movies;
+        return moviesByYear;
     }
 
     public List<Movie> getMovieByName(String name) {
