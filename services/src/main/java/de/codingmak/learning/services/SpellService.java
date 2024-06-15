@@ -1,5 +1,6 @@
 package de.codingmak.learning.services;
 
+import de.codingmak.learning.exceptions.SpellNotFoundException;
 import de.codingmak.learning.models.Spell;
 import org.springframework.stereotype.Service;
 
@@ -109,15 +110,29 @@ public class SpellService {
     }
 
     public List<Spell> getSpellByName(String name) {
-        return spellList.stream()
+
+        List<Spell> spellByName = spellList.stream()
                 .filter(spell -> spell.getName().toLowerCase().contains(name.toLowerCase()))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (spellByName.isEmpty()) {
+            throw new SpellNotFoundException("Spell with name " + name + " not found.");
+        }
+
+        return spellByName;
     }
 
     public List<Spell> getSpellByType(String type) {
-        return spellList.stream()
+
+        List<Spell> spellByType = spellList.stream()
                 .filter(spell -> spell.getElementType().toLowerCase().contains(type.toLowerCase()))
                 .collect(Collectors.toList());
+
+        if (spellByType.isEmpty()) {
+            throw new SpellNotFoundException("Spell with Type: " + type + " not found.");
+        }
+
+        return spellByType;
     }
 
     public List<Spell> getUnforgivenSpells(boolean unforgiven) {
