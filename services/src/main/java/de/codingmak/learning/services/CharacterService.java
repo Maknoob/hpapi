@@ -16,62 +16,62 @@ public class CharacterService {
     public CharacterService() {
         characterList = new ArrayList<>();
 
-        Character harry = new Character(
+        Character harry = new Character(1,
                 "Harry Potter", "Human", "Male", "31-07-1980", "1980", 44,
                 "Green", "Black", true, true, false,
                 "Half-blood", true, "Stag", "Holly, 11\", Phoenix feather",
                 "Gryffindor", "Daniel Radcliffe", "URL or path to image"
         );
-        Character ron = new Character(
+        Character ron = new Character(2,
                 "Ron Weasley", "Human", "Male", "01-03-1980", "1980", 44,
                 "Blue", "Red", true, true, false,
                 "Pure-blood", true, "Jack Russell Terrier", "Willow, 14\", Unicorn hair",
                 "Gryffindor", "Rupert Grint", "URL or path to image"
         );
-        Character hermione = new Character(
+        Character hermione = new Character(3,
                 "Hermione Granger", "Human", "Female", "19-09-1979", "1979", 44,
                 "Brown", "Brown", true, true, false,
                 "Muggle-born", true, "Otter", "Vine, 10¾\", Dragon heartstring",
                 "Gryffindor", "Emma Watson", "URL or path to image"
         );
-        Character dumbledore = new Character(
+        Character dumbledore = new Character(4,
                 "Albus Dumbledore", "Human", "Male", "1881", "1881", 115,
                 "Blue", "Silver (white)", false, false, true,
                 "Half-blood", true, "Phoenix", "Elder, 15\", Thestral tail hair",
                 "Gryffindor", "Richard Harris / Michael Gambon", "URL or path to image"
         );
-        Character snape = new Character(
+        Character snape = new Character(5,
                 "Severus Snape", "Human", "Male", "09-01-1960", "1960", 38,
                 "Black", "Black", false, true, true,
                 "Half-blood", true, "Doe", "Unknown",
                 "Slytherin", "Alan Rickman", "URL or path to image"
         );
-        Character hagrid = new Character(
+        Character hagrid = new Character(6,
                 "Rubeus Hagrid", "Half-giant", "Male", "06-12-1928", "1928", 95,
                 "Black", "Black", true, true, true,
                 "Half-giant", true, "None (non-corporeal)", "Oak, 16\", Unknown core",
                 "Gryffindor", "Robbie Coltrane", "URL or path to image"
         );
 
-        Character draco = new Character(
+        Character draco = new Character(7,
                 "Draco Malfoy", "Human", "Male", "05-06-1980", "1980", 44,
                 "Grey", "Blonde", true, true, false,
                 "Pure-blood", true, "None (unknown)", "Hawthorn, 10\", Unicorn hair",
                 "Slytherin", "Tom Felton", "URL or path to image"
         );
-        Character mcgonagall = new Character(
+        Character mcgonagall = new Character(8,
                 "Minerva McGonagall", "Human", "Female", "04-10-1935", "1935", 89,
                 "Green", "Black (grey)", true, true, true,
                 "Half-blood", true, "Cat", "Fir, 9½\", Dragon heartstring",
                 "Gryffindor", "Maggie Smith", "URL or path to image"
         );
-        Character sirius = new Character(
+        Character sirius = new Character(9,
                 "Sirius Black", "Human", "Male", "03-11-1959", "1959", 36,
                 "Grey", "Black", false, true, false,
                 "Pure-blood", true, "Dog", "Unknown",
                 "Gryffindor", "Gary Oldman", "URL or path to image"
         );
-        Character bellatrix = new Character(
+        Character bellatrix = new Character(10,
                 "Bellatrix Lestrange", "Human", "Female", "1951", "1951", 47,
                 "Dark", "Black", false, true, false,
                 "Pure-blood", true, "None (unknown)", "Walnut, 12¾\", Dragon heartstring",
@@ -83,6 +83,12 @@ public class CharacterService {
 
     public List<Character> getCharacterList() {
         return characterList;
+    }
+
+    public List<Character> getCharacterByID(int id) {
+        return characterList.stream()
+                .filter(character -> character.getId() == id)
+                .toList();
     }
 
     public List<Character> getCharacterByName(String name) {
