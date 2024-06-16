@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Character {
 
-    private final UUID id;
+    private final int id;
     private final String name;
     private final String species;
     private final String gender;
@@ -24,8 +24,8 @@ public class Character {
     private final String actor;
     private final String image;
 
-    public Character(String name, String species, String gender, String dateOfBirth, String yearOfBirth, int age, String eyeColor, String hairColor, boolean alive, boolean hogwartsStudent, boolean hogwartsStaff, String ancestry, boolean wizard, String patronus, String wand, String house, String actor, String image) {
-        this.id = UUID.randomUUID();
+    public Character(int id, String name, String species, String gender, String dateOfBirth, String yearOfBirth, int age, String eyeColor, String hairColor, boolean alive, boolean hogwartsStudent, boolean hogwartsStaff, String ancestry, boolean wizard, String patronus, String wand, String house, String actor, String image) {
+        this.id = id;
         this.name = name;
         this.species = species;
         this.gender = gender;
@@ -46,7 +46,7 @@ public class Character {
         this.image = image;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 

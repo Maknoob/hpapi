@@ -4,15 +4,15 @@ import java.util.UUID;
 
 public class Spell {
 
-    private final UUID id;
+    private final int id;
     private final String name;
     private final String elementType;
     private final String description;
     private final String seenIn;
     private final boolean unforgiven;
 
-    public Spell(String name, String elementType, String description, String seenIn, boolean unforgiven) {
-        this.id = UUID.randomUUID();
+    public Spell(int id, String name, String elementType, String description, String seenIn, boolean unforgiven) {
+        this.id = id;
         this.name = name;
         this.elementType = elementType;
         this.description = description;
@@ -20,7 +20,7 @@ public class Spell {
         this.unforgiven = unforgiven;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 

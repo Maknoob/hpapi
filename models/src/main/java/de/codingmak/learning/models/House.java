@@ -6,19 +6,19 @@ import java.util.UUID;
 
 public class House {
 
-    private final UUID id;
+    private final int id;
     private final String name;
     private final String description;
     private final List<String> members;
 
-    public House(String name, String description, HouseMember houseMember) {
-        this.id = UUID.randomUUID();
+    public House(int id, String name, String description, HouseMember houseMember) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.members = new ArrayList<>(houseMember.getHouseMembers());
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 

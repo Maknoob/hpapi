@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Movie {
 
-    private final UUID id;
+    private final int id;
     private final String name;
     private final String part;
     private final String description;
@@ -12,9 +12,9 @@ public class Movie {
     private final String releaseYear;
     private final String image;
 
-    public Movie(String name, String part, String description, String actors, String releaseYear, String image) {
+    public Movie(int id, String name, String part, String description, String actors, String releaseYear, String image) {
         this.image = image;
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.name = name;
         this.part = part;
         this.description = description;
@@ -22,7 +22,7 @@ public class Movie {
         this.releaseYear = releaseYear;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
