@@ -1,12 +1,11 @@
 package de.codingmak.learning.controllers;
 
+import de.codingmak.learning.exceptions.HouseNotFoundException;
 import de.codingmak.learning.models.House;
 import de.codingmak.learning.services.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +24,11 @@ public class HouseController {
         return houseService.getHouseList();
     }
 
+    @GetMapping(params = "id")
+    public List<House> getHouseById(@RequestParam(name = "id") int id) {
+        return houseService.getHouseById(id);
+    }
+
     @GetMapping(params = "name")
     public List<House> getHouseByName(@RequestParam(name = "name") String name) {
         return houseService.getHouseByName(name);
@@ -33,5 +37,11 @@ public class HouseController {
     @GetMapping(params = "member")
     public List<House> getHouseByMember(@RequestParam(name = "member") String member) {
         return houseService.getHouseByMember(member);
+    }
+
+    @ExceptionHandler(HouseNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleHouseNotFoundException(HouseNotFoundException e) {
+        return e.getMessage();
     }
 }
