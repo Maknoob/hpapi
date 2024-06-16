@@ -17,84 +17,84 @@ public class SpellService {
     public SpellService() {
         spellList = new ArrayList<>();
 
-        Spell avadaKedavra = new Spell(
+        Spell avadaKedavra = new Spell(1,
                 "Avada Kedavra",
                 "Dark Arts",
                 "The Killing Curse; causes instant, painless death to the victim.",
                 "Harry Potter and the Goblet of Fire",
                 true
         );
-        Spell expelliarmus = new Spell(
+        Spell expelliarmus = new Spell(2,
                 "Expelliarmus",
                 "Charm",
                 "Disarming Charm; forces whatever an opponent is holding to fly out of their hand.",
                 "Harry Potter and the Chamber of Secrets",
                 false
         );
-        Spell expectoPatronum = new Spell(
+        Spell expectoPatronum = new Spell(3,
                 "Expecto Patronum",
                 "Charm",
                 "Conjures a Patronus, a protective shield that takes the form of an animal.",
                 "Harry Potter and the Prisoner of Azkaban",
                 false
         );
-        Spell wingardiumLeviosa = new Spell(
+        Spell wingardiumLeviosa = new Spell(4,
                 "Wingardium Leviosa",
                 "Charm",
                 "Levitation Charm; causes objects to levitate.",
                 "Harry Potter and the Philosopher's Stone",
                 false
         );
-        Spell crucio = new Spell(
+        Spell crucio = new Spell(5,
                 "Crucio",
                 "Dark Arts",
                 "The Cruciatus Curse; inflicts unbearable pain on the victim.",
                 "Harry Potter and the Goblet of Fire",
                 true
         );
-        Spell imperio = new Spell(
+        Spell imperio = new Spell(6,
                 "Imperio",
                 "Dark Arts",
                 "The Imperius Curse; places the victim under the caster's control.",
                 "Harry Potter and the Goblet of Fire",
                 true
         );
-        Spell lumos = new Spell(
+        Spell lumos = new Spell(7,
                 "Lumos",
                 "Charm",
                 "Produces light from the caster's wand.",
                 "Harry Potter and the Philosopher's Stone",
                 false
         );
-        Spell nox = new Spell(
+        Spell nox = new Spell(8,
                 "Nox",
                 "Charm",
                 "Extinguishes the light from the caster's wand.",
                 "Harry Potter and the Philosopher's Stone",
                 false
         );
-        Spell stupefy = new Spell(
+        Spell stupefy = new Spell(9,
                 "Stupefy",
                 "Charm",
                 "Stunning de.codingmak.learning.models.Spell; stuns the target.",
                 "Harry Potter and the Goblet of Fire",
                 false
         );
-        Spell accio = new Spell(
+        Spell accio = new Spell(10,
                 "Accio",
                 "Charm",
                 "Summoning Charm; summons objects towards the caster.",
                 "Harry Potter and the Goblet of Fire",
                 false
         );
-        Spell aguamenti = new Spell(
+        Spell aguamenti = new Spell(11,
                 "Aguamenti",
                 "Charm",
                 "Produces a jet of water from the caster's wand.",
                 "Harry Potter and the Half-Blood Prince",
                 false
         );
-        Spell alohomora = new Spell(
+        Spell alohomora = new Spell(12,
                 "Alohomora",
                 "Charm",
                 "Unlocks doors and other objects.",
