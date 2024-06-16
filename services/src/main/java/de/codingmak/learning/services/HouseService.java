@@ -1,6 +1,6 @@
 package de.codingmak.learning.services;
 
-import de.codingmak.learning.exceptions.HouseNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.House;
 import de.codingmak.learning.models.HouseMember;
 import org.springframework.stereotype.Service;
@@ -42,26 +42,13 @@ public class HouseService {
         return houseList;
     }
 
-    public List<House> getHouseById(int id) {
-
-        List<House> houses = houseList.stream()
-                .filter(house -> house.getId() == id)
-                .toList();
-
-        if (houses.isEmpty()) {
-            throw new HouseNotFoundException("House with id: " + id + " not found.");
-        } else {
-            return houses;
-        }
-    }
-
     public List<House> getHouseByName(String name) {
         List<House> houseByName = houseList.stream()
                 .filter(house -> house.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
 
         if (houseByName.isEmpty()) {
-            throw new HouseNotFoundException("House with name: " + name + " not found.");
+            throw new NotFoundException.HouseNotFoundException(name);
         } else {
             return houseByName;
         }
@@ -74,7 +61,7 @@ public class HouseService {
                 .collect(Collectors.toList());
 
         if (houseByMember.isEmpty()) {
-            throw new HouseNotFoundException("House with member: " + member + " not found.");
+            throw new NotFoundException.HouseNotFoundException(member);
         } else {
             return houseByMember;
         }
