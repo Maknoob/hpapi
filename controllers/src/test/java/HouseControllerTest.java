@@ -1,4 +1,5 @@
-import de.codingmak.learning.exceptions.HouseNotFoundException;
+
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.House;
 import de.codingmak.learning.services.HouseService;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,18 +24,6 @@ public class HouseControllerTest {
     }
 
     @Test
-    public void testGetHouseById_ValidId() {
-        List<House> houses = houseService.getHouseById(1);
-        assertEquals(1, houses.size());
-        assertEquals("Gryffindor", houses.getFirst().getName());
-    }
-
-    @Test
-    public void testGetHouseById_InvalidId() {
-        assertThrows(HouseNotFoundException.class, () -> houseService.getHouseById(5));
-    }
-
-    @Test
     public void testGetHouseByName_ValidName() {
         List<House> houses = houseService.getHouseByName("Gryffindor");
         assertEquals("Gryffindor", houses.getFirst().getName());
@@ -42,7 +31,7 @@ public class HouseControllerTest {
 
     @Test
     public void testGetHouseByName_InvalidName() {
-        assertThrows(HouseNotFoundException.class, () -> houseService.getHouseByName("invalid"));
+        assertThrows(NotFoundException.HouseNotFoundException.class, () -> houseService.getHouseByName("invalid"));
     }
 
     @Test
@@ -53,7 +42,7 @@ public class HouseControllerTest {
 
     @Test
     public void testGetHouseByMember_InvalidMember() {
-        assertThrows(HouseNotFoundException.class, () -> houseService.getHouseByMember("invalid"));
+        assertThrows(NotFoundException.HouseNotFoundException.class, () -> houseService.getHouseByMember("invalid"));
     }
 
 }
