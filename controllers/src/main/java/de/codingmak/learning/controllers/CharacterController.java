@@ -5,6 +5,7 @@ import de.codingmak.learning.models.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +23,10 @@ public class CharacterController {
     @GetMapping
     public List<Character> getAllRoles() {
         return characterService.getCharacterList();
+    }
+
+    @GetMapping(params = "id")
+    public List<Character> getCharacterById(@RequestParam(name = "id") int id) {
+        return characterService.getCharacterByID(id);
     }
 }
