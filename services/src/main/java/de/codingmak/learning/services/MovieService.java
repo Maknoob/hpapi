@@ -1,7 +1,7 @@
 package de.codingmak.learning.services;
 
 import de.codingmak.learning.exceptions.InvalidPartException;
-import de.codingmak.learning.exceptions.MovieNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import de.codingmak.learning.models.Movie;
@@ -44,7 +44,7 @@ public class MovieService {
         }
 
         if (partNumber <= 0 || partNumber > 8) {
-            throw new MovieNotFoundException("Movie not found with part: " + part);
+            throw new NotFoundException.MovieNotFoundException(part);
         }
 
         return movieList.stream()
@@ -65,7 +65,7 @@ public class MovieService {
                 .filter(movie -> movie.getReleaseYear().equalsIgnoreCase(releaseYear))
                 .toList();
         if (moviesByYear.isEmpty()) {
-            throw new MovieNotFoundException("No movies found for release year: " + releaseYear);
+            throw new NotFoundException.MovieNotFoundException(releaseYear);
         }
 
         return moviesByYear;
@@ -77,7 +77,7 @@ public class MovieService {
                 .toList();
 
         if (movies.isEmpty()) {
-            throw new MovieNotFoundException("No movies found with name: " + name);
+            throw new NotFoundException.MovieNotFoundException(name);
         }
 
         return movies;

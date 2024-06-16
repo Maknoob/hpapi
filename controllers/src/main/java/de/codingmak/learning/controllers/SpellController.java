@@ -1,6 +1,6 @@
 package de.codingmak.learning.controllers;
 
-import de.codingmak.learning.exceptions.SpellNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Spell;
 import de.codingmak.learning.services.SpellService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +39,9 @@ public class SpellController {
         return spellService.getUnforgivenSpells(unforgiven);
     }
 
-    @ExceptionHandler(SpellNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleSpellNotFoundException(SpellNotFoundException e) {
+    public String handleSpellNotFoundException(NotFoundException.SpellNotFoundException e) {
         return e.getMessage();
     }
 }

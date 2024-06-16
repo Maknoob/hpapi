@@ -1,6 +1,6 @@
 
 import de.codingmak.learning.exceptions.InvalidPartException;
-import de.codingmak.learning.exceptions.MovieNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Movie;
 import de.codingmak.learning.services.MovieService;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +39,6 @@ public class MovieControllerTest {
 
     @Test
     public void testGetMovieByPart_PartNotFound() {
-        assertThrows(MovieNotFoundException.class, () -> movieService.getMovieByPart("9"));
+        assertThrows(NotFoundException.MovieNotFoundException.class, () -> movieService.getMovieByPart("9"));
     }
 }

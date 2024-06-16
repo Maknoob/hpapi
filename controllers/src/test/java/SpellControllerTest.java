@@ -1,4 +1,4 @@
-import de.codingmak.learning.exceptions.SpellNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Spell;
 import de.codingmak.learning.services.SpellService;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +29,6 @@ public class SpellControllerTest {
 
     @Test
     public void testGetSpellByName_NameNotFound() {
-        assertThrows(SpellNotFoundException.class, () -> spellService.getSpellByName("invalid"));
+        assertThrows(NotFoundException.SpellNotFoundException.class, () -> spellService.getSpellByName("invalid"));
     }
 }

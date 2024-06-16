@@ -1,7 +1,7 @@
 package de.codingmak.learning.controllers;
 
 import de.codingmak.learning.exceptions.InvalidPartException;
-import de.codingmak.learning.exceptions.MovieNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Movie;
 import de.codingmak.learning.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +42,9 @@ public class MovieController {
     }
 
 
-    @ExceptionHandler(MovieNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleMovieNotFoundException(MovieNotFoundException e) {
+    public String handleMovieNotFoundException(NotFoundException.MovieNotFoundException e) {
         return e.getMessage();
     }
 

@@ -1,6 +1,6 @@
 package de.codingmak.learning.services;
 
-import de.codingmak.learning.exceptions.SpellNotFoundException;
+import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Spell;
 import org.springframework.stereotype.Service;
 
@@ -116,7 +116,7 @@ public class SpellService {
                 .toList();
 
         if (spellByName.isEmpty()) {
-            throw new SpellNotFoundException("Spell with name " + name + " not found.");
+            throw new NotFoundException.SpellNotFoundException(name);
         }
 
         return spellByName;
@@ -129,7 +129,7 @@ public class SpellService {
                 .collect(Collectors.toList());
 
         if (spellByType.isEmpty()) {
-            throw new SpellNotFoundException("Spell with Type: " + type + " not found.");
+            throw new NotFoundException.SpellNotFoundException(type);
         }
 
         return spellByType;
