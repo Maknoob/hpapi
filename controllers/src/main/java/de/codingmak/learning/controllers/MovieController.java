@@ -1,6 +1,6 @@
 package de.codingmak.learning.controllers;
 
-import de.codingmak.learning.exceptions.InvalidPartException;
+import de.codingmak.learning.exceptions.InvalidException;
 import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Movie;
 import de.codingmak.learning.services.MovieService;
@@ -42,15 +42,16 @@ public class MovieController {
     }
 
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(NotFoundException.MovieNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleMovieNotFoundException(NotFoundException.MovieNotFoundException e) {
         return e.getMessage();
     }
 
-    @ExceptionHandler(InvalidPartException.class)
+    @ExceptionHandler({InvalidException.InvalidPartException.class, InvalidException.InvalidYearException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleInvalidPartException(InvalidPartException e) {
+    public String handleInvalidException(InvalidException e) {
         return e.getMessage();
     }
+
 }
