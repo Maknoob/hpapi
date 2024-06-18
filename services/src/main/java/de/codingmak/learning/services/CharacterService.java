@@ -1,5 +1,6 @@
 package de.codingmak.learning.services;
 
+import de.codingmak.learning.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import de.codingmak.learning.models.Character;
 
@@ -42,13 +43,13 @@ public class CharacterService {
         );
         Character snape = new Character(5,
                 "Severus Snape", "Human", "Male", "09-01-1960", "1960", 38,
-                "Black", "Black", false, true, true,
+                "Black", "Black", false, false, true,
                 "Half-blood", true, "Doe", "Unknown",
                 "Slytherin", "Alan Rickman", "URL or path to image"
         );
         Character hagrid = new Character(6,
                 "Rubeus Hagrid", "Half-giant", "Male", "06-12-1928", "1928", 95,
-                "Black", "Black", true, true, true,
+                "Black", "Black", true, false, true,
                 "Half-giant", true, "None (non-corporeal)", "Oak, 16\", Unknown core",
                 "Gryffindor", "Robbie Coltrane", "URL or path to image"
         );
@@ -61,7 +62,7 @@ public class CharacterService {
         );
         Character mcgonagall = new Character(8,
                 "Minerva McGonagall", "Human", "Female", "04-10-1935", "1935", 89,
-                "Green", "Black (grey)", true, true, true,
+                "Green", "Black (grey)", true, false, true,
                 "Half-blood", true, "Cat", "Fir, 9½\", Dragon heartstring",
                 "Gryffindor", "Maggie Smith", "URL or path to image"
         );
@@ -85,16 +86,16 @@ public class CharacterService {
         return characterList;
     }
 
-    public List<Character> getCharacterByID(int id) {
-        return characterList.stream()
-                .filter(character -> character.getId() == id)
-                .toList();
-    }
-
     public List<Character> getCharacterByName(String name) {
-        return characterList.stream()
+        List<Character> nameList = characterList.stream()
                 .filter(character -> character.getName().equalsIgnoreCase(name))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (nameList.isEmpty()) {
+            throw new NotFoundException.CharacterNotFoundException(name);
+        } else {
+            return nameList;
+        }
     }
 
     public List<Character> getCharacterByGender(String gender) {
@@ -104,14 +105,38 @@ public class CharacterService {
     }
 
     public List<Character> getCharacterByAge(int age) {
-        return characterList.stream()
+        List<Character> ageList = characterList.stream()
                 .filter(character -> character.getAge() == age)
-                .collect(Collectors.toList());
+                .toList();
+
+        if (ageList.isEmpty()) {
+            throw new NotFoundException.CharacterNotFoundException(String.valueOf(age));
+        } else {
+            return ageList;
+        }
     }
 
     public List<Character> getCharacterByHouse(String house) {
-        return characterList.stream()
+        List<Character> houseList = characterList.stream()
                 .filter(character -> character.getHouse().equalsIgnoreCase(house))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (houseList.isEmpty()) {
+            throw new NotFoundException.CharacterNotFoundException(String.valueOf(house));
+        } else {
+            return houseList;
+        }
+    }
+
+    public List<Character> getCharacterByAncestry(String ancestry) {
+        List<Character> ancestryList = characterList.stream()
+                .filter(character -> character.getAncestry().equalsIgnoreCase(ancestry))
+                .toList();
+
+        if (ancestryList.isEmpty()) {
+            throw new NotFoundException.CharacterNotFoundException(String.valueOf(ancestry));
+        } else {
+            return ancestryList;
+        }
     }
 }
