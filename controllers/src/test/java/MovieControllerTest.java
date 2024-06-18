@@ -1,5 +1,5 @@
 
-import de.codingmak.learning.exceptions.InvalidPartException;
+import de.codingmak.learning.exceptions.InvalidException;
 import de.codingmak.learning.exceptions.NotFoundException;
 import de.codingmak.learning.models.Movie;
 import de.codingmak.learning.services.MovieService;
@@ -29,12 +29,12 @@ public class MovieControllerTest {
     public void testGetMovieByPart_ValidPart() {
         List<Movie> movies = movieService.getMovieByPart("1");
         assertEquals(1, movies.size());
-        assertEquals("Harry Potter and the Philosopher's Stone", movies.get(0).getName());
+        assertEquals("Harry Potter and the Philosopher's Stone", movies.getFirst().getName());
     }
 
     @Test
     public void testGetMovieByPart_InvalidPartFormat() {
-        assertThrows(InvalidPartException.class, () -> movieService.getMovieByPart("invalid"));
+        assertThrows(InvalidException.InvalidPartException.class, () -> movieService.getMovieByPart("invalid"));
     }
 
     @Test
