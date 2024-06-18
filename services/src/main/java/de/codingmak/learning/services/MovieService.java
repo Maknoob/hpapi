@@ -1,6 +1,6 @@
 package de.codingmak.learning.services;
 
-import de.codingmak.learning.exceptions.InvalidPartException;
+import de.codingmak.learning.exceptions.InvalidException;
 import de.codingmak.learning.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +40,7 @@ public class MovieService {
         try {
             partNumber = Integer.parseInt(part);
         } catch (NumberFormatException e) {
-            throw new InvalidPartException("Invalid part number: " + part);
+            throw new InvalidException.InvalidPartException(part);
         }
 
         if (partNumber <= 0 || partNumber > 8) {
@@ -53,12 +53,9 @@ public class MovieService {
     }
 
     public List<Movie> getMovieByReleaseYear(String releaseYear) {
-        int yearNumber;
 
-        try {
-            yearNumber = Integer.parseInt(releaseYear);
-        } catch (NumberFormatException e) {
-            throw new InvalidPartException("This is not a valid number: " + releaseYear);
+        if (!isValidNumber(releaseYear)) {
+            throw new InvalidException.InvalidYearException(releaseYear);
         }
 
         List<Movie> moviesByYear = movieList.stream()
@@ -81,5 +78,10 @@ public class MovieService {
         }
 
         return movies;
+    }
+
+    public static boolean isValidNumber(String input) {
+        String numberRegex = "\\d+";
+        return input.matches(numberRegex);
     }
 }
