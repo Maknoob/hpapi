@@ -88,7 +88,7 @@ public class CharacterService {
 
     public List<Character> getCharacterByName(String name) {
         List<Character> nameList = characterList.stream()
-                .filter(character -> character.getName().equalsIgnoreCase(name))
+                .filter(character -> character.getName().toLowerCase().contains(name.toLowerCase()))
                 .toList();
 
         if (nameList.isEmpty()) {
